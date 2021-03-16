@@ -13,15 +13,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Routers
 app.use('/api/gateway', gatewayRouter);
 
+// Error middleware
 app.use(async (err, req, res, next) => {
     await errorHandler.handleError(err, res);
 });
 
-process.on("uncaughtException", error => {
-    errorHandler.handleError(error);
-});
-process.on("unhandledRejection", (reason) => {
-    throw reason;
-});
-
-app.listen(3000, () => console.log('Example app listening on port 3000!'));
+module.exports = app;

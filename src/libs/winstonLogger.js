@@ -1,7 +1,7 @@
 const winston = require('winston');
 const path = require('path');
 
-const logsDir = path.join(__dirname, '../../logs');
+const logsDir = path.join(__dirname, '../../logs/');
 
 const levels = {
     error: 0,
@@ -12,8 +12,8 @@ const levels = {
 }
 
 const level = () => {
-    const env = process.env.NODE_ENV || 'development'
-    const isDevelopment = env === 'development'
+    const env = process.env.NODE_ENV || 'dev'
+    const isDevelopment = env === 'dev'
     return isDevelopment ? 'debug' : 'warn'
 };
 
