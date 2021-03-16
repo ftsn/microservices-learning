@@ -3,7 +3,7 @@ function AppError(name, httpCode, description, isOperational) {
     Error.captureStackTrace(this);
     this.name = name;
     this.httpCode = httpCode;
-    this.description = description;
+    this.message = description;
     this.isOperational = isOperational;
 };
 AppError.prototype = Object.create(Error.prototype);

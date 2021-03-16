@@ -1,19 +1,20 @@
 const errors = require('./errorTypes')
+const Logger = require('./libs/winstonLogger')
 
 module.exports = new errorHandler();
 
 function errorHandler() {
-    // TODO add logging (and maybe mailing?)
     this.handleError = async (error, responseStream) => {
-        console.log('In the error handler');
-        responseStream.status(error.httpCode);
-        responseStream.send(error.description);
         if (this.isTrustedError(error) === true)
-            console.log('Trusted error; will not exit.');
+            Logger.warn(error.name + ' :' + error.message + '\nAssociated status code: ' + error.httpCode);
         else {
-            console.log('Untrusted error. exiting');
+            responseStream.status(500);
+            responseStream.send(error.message);
+            Logger.error('Untrusted error. ' + error.name + ': ' + error.message);
             process.exit(1);
         }
+        responseStream.status(error.httpCode);
+        responseStream.send(error.message);
     };
 
     this.isTrustedError = (error) => {

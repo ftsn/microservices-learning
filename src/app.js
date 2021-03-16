@@ -1,10 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const morganMiddleware = require('./libs/morganLogger');
 const gatewayRouter = require('./gateway/gatewayRouter');
 const errorHandler = require('./errorHandler');
 
 const app = express();
 
+app.use(morganMiddleware);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -18,7 +20,6 @@ app.use(async (err, req, res, next) => {
 process.on("uncaughtException", error => {
     errorHandler.handleError(error);
 });
-
 process.on("unhandledRejection", (reason) => {
     throw reason;
 });
