@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Routers
 app.use('/api/gateway', gatewayRouter);
 
-// Error middleware
+// eslint-disable-next-line no-unused-vars
 app.use(async (err, req, res, next) => {
     await errorHandler.handleError(err, res);
 });

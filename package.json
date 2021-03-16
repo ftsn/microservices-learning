@@ -26,5 +26,7 @@
     "rotating-file-stream": "^2.1.5",
     "winston": "^3.3.3"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "^7.22.0"
+  }
 }

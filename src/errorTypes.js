@@ -5,7 +5,7 @@ function AppError(name, httpCode, description, isOperational) {
     this.httpCode = httpCode;
     this.message = description;
     this.isOperational = isOperational;
-};
+}
 AppError.prototype = Object.create(Error.prototype);
 AppError.prototype.constructor = AppError;
 
